@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Sparkles, Image as ImageIcon, Copy, RefreshCw, Layers, Cpu, CheckCircle } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('generator');
@@ -68,48 +67,72 @@ export default function App() {
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  // Styles CSS intégrés pour un look Dark Studio irréprochable
+  const styles = {
+    container: { backgroundColor: '#09090b', color: '#f4f4f5', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', paddingBottom: '90px' },
+    header: { position: 'sticky', top: 0, zIndex: 50, backgroundColor: 'rgba(24, 24, 27, 0.95)', backdropFilter: 'blur(8px)', borderBottom: '1px solid #27272a', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+    logoBox: { display: 'flex', alignItems: 'center', gap: '10px' },
+    iconBadge: { background: 'linear-gradient(135deg, #9333ea, #4f46e5)', padding: '8px', borderRadius: '10px', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+    title: { fontWeight: '700', fontSize: '14px', letterSpacing: '0.05em', margin: 0 },
+    subtitle: { fontSize: '10px', color: '#a1a1aa', margin: 0 },
+    inputKey: { backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '8px', padding: '8px 12px', fontSize: '12px', color: '#f4f4f5', width: '130px', outline: 'none' },
+    main: { maxWidth: '500px', margin: '0 auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '20px' },
+    card: { backgroundColor: '#18181b', border: '1px solid #27272a', borderRadius: '16px', padding: '16px', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: '12px' },
+    label: { fontSize: '11px', color: '#a1a1aa', fontWeight: '500' },
+    select: { width: '100%', backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '10px', padding: '10px', fontSize: '12px', color: '#f4f4f5', outline: 'none' },
+    textarea: { width: '100%', backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '10px', padding: '10px', fontSize: '12px', color: '#f4f4f5', outline: 'none', resize: 'none', height: '70px', boxSizing: 'border-box' },
+    buttonRow: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' },
+    btnSecondary: { backgroundColor: '#27272a', border: '1px solid #3f3f46', borderRadius: '10px', padding: '10px', fontSize: '12px', color: '#f4f4f5', fontWeight: '500', cursor: 'pointer', textAlign: 'center' },
+    btnPrimary: { backgroundColor: '#9333ea', border: 'none', borderRadius: '10px', padding: '10px', fontSize: '12px', color: '#fff', fontWeight: '600', cursor: 'pointer', textAlign: 'center', boxShadow: '0 4px 12px rgba(147, 51, 234, 0.4)' },
+    panelCard: { backgroundColor: '#18181b', border: '1px solid #27272a', borderRadius: '16px', overflow: 'hidden', display: 'flex', flexDirection: 'column' },
+    panelHeader: { backgroundColor: '#09090b', padding: '8px 12px', borderBottom: '1px solid #27272a', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', color: '#a1a1aa' },
+    panelImageArea: { aspectRatio: '4/5', backgroundColor: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #27272a', overflow: 'hidden' },
+    panelBody: { padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' },
+    promptText: { fontSize: '11px', color: '#a1a1aa', fontStyle: 'italic', backgroundColor: '#09090b', padding: '8px', borderRadius: '8px', border: '1px solid #27272a', margin: 0, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' },
+    nav: { position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(24, 24, 27, 0.95)', backdropFilter: 'blur(8px)', borderTop: '1px solid #27272a', padding: '10px 24px', display: 'flex', justifyContent: 'around', alignItems: 'center', zIndex: 50 },
+    navBtn: (isActive) => ({ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', fontSize: '11px', color: isActive ? '#c084fc' : '#a1a1aa', fontWeight: isActive ? '700' : '400', cursor: 'pointer', flex: 1 })
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-100 font-sans pb-24">
+    <div style={styles.container}>
       {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-zinc-900/95 backdrop-blur-md border-b border-zinc-800 px-4 py-3 flex items-center justify-between shadow-lg">
-        <div className="flex items-center gap-2.5">
-          <div className="bg-gradient-to-tr from-purple-600 to-indigo-600 p-2 rounded-xl text-white shadow-md shadow-purple-900/30">
-            <Sparkles className="w-5 h-5" />
-          </div>
+      <header style={styles.header}>
+        <div style={styles.logoBox}>
+          <div style={styles.iconBadge}>✨</div>
           <div>
-            <h1 className="font-bold text-sm tracking-wider uppercase">COMICFORGE <span className="text-purple-400">AI</span></h1>
-            <p className="text-[10px] text-zinc-400">Dark Comics & Webtoon Studio</p>
+            <h1 style={styles.title}>COMICFORGE <span style={{color: '#c084fc'}}>AI</span></h1>
+            <p style={styles.subtitle}>Dark Comics & Webtoon Studio</p>
           </div>
         </div>
-        
         <div>
           <input 
             type="password" 
             placeholder="Clé API Gemini..." 
             value={apiKey} 
             onChange={(e) => setApiKey(e.target.value)}
-            className="bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs w-32 md:w-48 text-zinc-200 focus:outline-none focus:border-purple-500 shadow-inner"
+            style={styles.inputKey}
           />
         </div>
       </header>
 
       {/* CONTENU PRINCIPAL */}
-      <main className="flex-1 max-w-xl w-full mx-auto p-4 space-y-6">
+      <main style={styles.main}>
         
         {activeTab === 'generator' && (
-          <div className="space-y-6">
-            {/* CARTE DE CONTRÔLE */}
-            <div className="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-4 shadow-2xl space-y-4 backdrop-blur-sm">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-purple-400 flex items-center gap-2">
-                <Cpu className="w-4 h-4" /> Studio de Synthèse de Prompts Dark
+          <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+            
+            {/* CARTE CONTRÔLE */}
+            <div style={styles.card}>
+              <h2 style={{fontSize: '12px', fontWeight: 'bold', textTransform: 'uppercase', color: '#c084fc', margin: 0}}>
+                ⚡ Studio de Synthèse de Prompts Dark
               </h2>
 
-              <div className="space-y-1.5">
-                <label className="text-[11px] text-zinc-400 font-medium">Style Artistique & Ambiance</label>
+              <div>
+                <label style={styles.label}>Style Artistique & Ambiance</label>
                 <select 
                   value={stylePreset} 
                   onChange={(e) => setStylePreset(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-purple-500"
+                  style={styles.select}
                 >
                   {Object.entries(stylePresets).map(([key, val]) => (
                     <option key={key} value={key}>{val.name}</option>
@@ -117,81 +140,62 @@ export default function App() {
                 </select>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-[11px] text-zinc-400 font-medium">Description de la Scène / Action</label>
+              <div>
+                <label style={styles.label}>Description de la Scène / Action</label>
                 <textarea 
-                  rows="3"
                   value={customPrompt}
                   onChange={(e) => setCustomPrompt(e.target.value)}
                   placeholder="Décrivez votre scène sombre..."
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-purple-500 resize-none"
+                  style={styles.textarea}
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-2 pt-1">
-                <button 
-                  onClick={handleGeneratePrompt}
-                  className="bg-zinc-800 hover:bg-zinc-700 font-medium py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-zinc-700 text-zinc-200 active:scale-95"
-                >
-                  <Copy className="w-3.5 h-3.5 text-purple-400" /> Générer Prompts
+              <div style={styles.buttonRow}>
+                <button onClick={handleGeneratePrompt} style={styles.btnSecondary}>
+                  📋 Générer Prompts
                 </button>
-                <button 
-                  onClick={simulateGeneration}
-                  disabled={isGenerating}
-                  className="bg-purple-600 hover:bg-purple-500 font-medium py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 text-white shadow-lg shadow-purple-900/40 disabled:opacity-50 active:scale-95"
-                >
-                  {isGenerating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
-                  {isGenerating ? 'Création...' : 'Générer Planches'}
+                <button onClick={simulateGeneration} disabled={isGenerating} style={styles.btnPrimary}>
+                  {isGenerating ? 'Création...' : '✨ Générer Planches'}
                 </button>
               </div>
             </div>
 
             {/* LISTE DES PANNEAUX */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between px-1">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-300">Storyboard (4 Panneaux)</h3>
-                <span className="text-[10px] bg-purple-950/80 text-purple-300 border border-purple-800/50 px-2 py-0.5 rounded-full font-mono">Format 4:5</span>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 4px'}}>
+                <span style={{fontSize: '12px', fontWeight: 'bold', textTransform: 'uppercase', color: '#d4d4d8'}}>Storyboard (4 Panneaux)</span>
+                <span style={{fontSize: '10px', backgroundColor: '#3b0764', color: '#d8b4fe', padding: '2px 8px', borderRadius: '10px', border: '1px solid #581c87'}}>Format 4:5</span>
               </div>
 
-              <div className="space-y-4">
+              <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
                 {generatedPanels.map((panel, idx) => (
-                  <div key={panel.id} className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-lg">
-                    <div className="bg-zinc-950 px-3 py-2 border-b border-zinc-800/80 flex justify-between items-center text-[11px] text-zinc-400">
-                      <span className="font-semibold text-zinc-300">Panneau #{idx + 1}</span>
-                      <span className="text-purple-400 font-mono">Vertical 4:5</span>
+                  <div key={panel.id} style={styles.panelCard}>
+                    <div style={styles.panelHeader}>
+                      <span style={{fontWeight: '600', color: '#e4e4e7'}}>Panneau #{idx + 1}</span>
+                      <span style={{color: '#c084fc', fontFamily: 'monospace'}}>Vertical 4:5</span>
                     </div>
 
-                    <div className="relative aspect-[4/5] bg-zinc-950 flex items-center justify-center border-b border-zinc-800">
+                    <div style={styles.panelImageArea}>
                       {panel.imageUrl ? (
-                        <img src={panel.imageUrl} alt={`Panel ${idx+1}`} className="w-full h-full object-cover" />
+                        <img src={panel.imageUrl} alt={`Panel ${idx+1}`} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
                       ) : (
-                        <div className="text-center p-6 text-zinc-600 space-y-2">
-                          <ImageIcon className="w-8 h-8 mx-auto opacity-30 text-purple-400" />
-                          <p className="text-[11px]">En attente de rendu visuel...</p>
+                        <div style={{textAlign: 'center', padding: '20px', color: '#52525b'}}>
+                          <div style={{fontSize: '28px', marginBottom: '6px'}}>🖼️</div>
+                          <p style={{fontSize: '11px', margin: 0}}>En attente de rendu visuel...</p>
                         </div>
                       )}
                     </div>
 
-                    <div className="p-3 bg-zinc-900 space-y-2">
-                      <p className="text-[11px] text-zinc-400 italic line-clamp-2 bg-zinc-950/50 p-2 rounded-lg border border-zinc-800/50 font-mono">
+                    <div style={styles.panelBody}>
+                      <p style={styles.promptText}>
                         {panel.prompt || 'Appuyez sur "Générer Prompts" pour configurer ce panneau.'}
                       </p>
                       
                       <button 
                         onClick={() => copyToClipboard(panel.prompt, idx)}
-                        className="w-full bg-zinc-800 hover:bg-zinc-700 active:scale-95 py-2 px-3 rounded-xl text-[11px] font-medium text-zinc-200 flex items-center justify-center gap-1.5 transition border border-zinc-700/50"
+                        style={styles.btnSecondary}
                       >
-                        {copiedIndex === idx ? (
-                          <>
-                            <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                            <span className="text-emerald-400">Copié !</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5 text-purple-400" />
-                            <span>Copier le prompt pour ce panneau</span>
-                          </>
-                        )}
+                        {copiedIndex === idx ? '✅ Copié !' : '📋 Copier le prompt'}
                       </button>
                     </div>
                   </div>
@@ -202,19 +206,19 @@ export default function App() {
         )}
 
         {activeTab === 'webtoon' && (
-          <div className="space-y-4 animate-fadeIn">
-            <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-center space-y-1">
-              <h3 className="text-xs font-bold text-purple-400 uppercase tracking-widest">Mode Lecture Webtoon Vertical</h3>
-              <p className="text-[10px] text-zinc-400">Défilement fluide optimisé pour smartphone</p>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+            <div style={{backgroundColor: '#18181b', border: '1px solid #27272a', padding: '12px', borderRadius: '12px', textAlign: 'center'}}>
+              <h3 style={{fontSize: '12px', fontWeight: 'bold', color: '#c084fc', textTransform: 'uppercase', margin: '0 0 4px 0'}}>Mode Lecture Webtoon Vertical</h3>
+              <p style={{fontSize: '10px', color: '#a1a1aa', margin: 0}}>Défilement fluide optimisé pour smartphone</p>
             </div>
 
-            <div className="bg-black border-2 border-zinc-800 rounded-3xl p-3 shadow-2xl space-y-3 max-h-[75vh] overflow-y-auto">
+            <div style={{backgroundColor: '#000', border: '2px solid #27272a', borderRadius: '20px', padding: '12px', maxHeight: '75vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px'}}>
               {generatedPanels.map((panel, idx) => (
-                <div key={panel.id} className="rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 shadow-md">
+                <div key={panel.id} style={{borderRadius: '12px', overflow: 'hidden', backgroundColor: '#18181b', border: '1px solid #27272a'}}>
                   {panel.imageUrl ? (
-                    <img src={panel.imageUrl} alt={`Webtoon panel ${idx+1}`} className="w-full h-auto object-cover" />
+                    <img src={panel.imageUrl} alt={`Webtoon panel ${idx+1}`} style={{width: '100%', height: 'auto', display: 'block'}} />
                   ) : (
-                    <div className="h-56 flex items-center justify-center text-zinc-600 bg-zinc-950 text-xs">
+                    <div style={{height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#52525b', fontSize: '12px'}}>
                       Panneau {idx + 1} (Non généré)
                     </div>
                   )}
@@ -226,20 +230,14 @@ export default function App() {
 
       </main>
 
-      {/* NAVIGATION MOBILE INFERIEURE */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-zinc-900/95 backdrop-blur-md border-t border-zinc-800 py-2.5 px-8 flex justify-around items-center z-50 shadow-2xl">
-        <button 
-          onClick={() => setActiveTab('generator')}
-          className={`flex flex-col items-center gap-1 text-[11px] transition ${activeTab === 'generator' ? 'text-purple-400 font-bold scale-105' : 'text-zinc-400 hover:text-zinc-200'}`}
-        >
-          <Sparkles className="w-5 h-5" />
+      {/* NAVIGATION MOBILE INFÉRIEURE */}
+      <nav style={styles.nav}>
+        <button onClick={() => setActiveTab('generator')} style={styles.navBtn(activeTab === 'generator')}>
+          <span style={{fontSize: '18px'}}>⚡</span>
           <span>Studio & Panneaux</span>
         </button>
-        <button 
-          onClick={() => setActiveTab('webtoon')}
-          className={`flex flex-col items-center gap-1 text-[11px] transition ${activeTab === 'webtoon' ? 'text-purple-400 font-bold scale-105' : 'text-zinc-400 hover:text-zinc-200'}`}
-        >
-          <Layers className="w-5 h-5" />
+        <button onClick={() => setActiveTab('webtoon')} style={styles.navBtn(activeTab === 'webtoon')}>
+          <span style={{fontSize: '18px'}}>📜</span>
           <span>Mode Webtoon</span>
         </button>
       </nav>

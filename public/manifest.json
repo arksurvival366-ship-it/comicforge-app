@@ -1,16 +1,20 @@
 {
   "name": "ComicForge AI Studio",
   "short_name": "ComicForge",
+  "description": "Studio de création de dark comics, manga et webtoon assisté par IA",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#09090b",
   "theme_color": "#09090b",
   "orientation": "portrait",
+  "lang": "fr",
+  "categories": ["utilities", "entertainment", "design"],
   "icons": [
     {
-      "src": "/icon-512.png",
+      "src": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/sparkles.svg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]
